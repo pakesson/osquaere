@@ -2,7 +2,11 @@
 
 Toy clone of osquery written in Python.
 
-Example:
+## Supported modules
+
+* `os_version`
+
+## Example
 ```
 $ python -m osquaere
 Loading module "os_version"
