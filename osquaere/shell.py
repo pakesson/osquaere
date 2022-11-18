@@ -8,8 +8,7 @@ class Shell(apsw.Shell):
 
     def cmdloop(self):
         intro = f"""
-OSQUAERE
-SQLite version {apsw.sqlitelibversion()} (APSW {apsw.apswversion()})
+OSQUAERE (SQLite {apsw.sqlitelibversion()}, APSW {apsw.apswversion()})
 Enter ".help" for instructions
 Enter SQL statements terminated with a ";"
 """

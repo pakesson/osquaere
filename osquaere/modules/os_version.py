@@ -32,7 +32,6 @@ class OSVersionModule:
             platform.machine(),
         ]
         schema = f"CREATE TABLE os_version({', '.join(map(str, columns)) })"
-        print(schema)
         return schema, SingleRowTable(columns, data)
 
     Connect = Create
