@@ -5,6 +5,7 @@ Toy clone of osquery written in Python.
 ## Supported modules
 
 * `os_version`
+* `processes` (WiP)
 
 ## Example
 ```

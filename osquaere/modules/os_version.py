@@ -38,3 +38,4 @@ class OSVersionModule:
 
 
 module = OSVersionModule
+name = "os_version"

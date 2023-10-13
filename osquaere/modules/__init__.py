@@ -1,10 +1,16 @@
-from . import os_version
+import inspect
 
-modules = [["os_version", os_version.module]]
+import apsw
 
+from . import os_version, processes
+
+modules = [os_version, processes]
 
 def load_modules(db):
-    for name, module in modules:
-        print(f'Loading module "{name}"')
-        db.createmodule(name, module())
-        db.execute(f"CREATE VIRTUAL TABLE {name} USING {name}()")
+    for module in modules:
+        print(f'Loading module "{module.name}"')
+        if inspect.isclass(module.module):
+            db.createmodule(module.name, module.module())
+            db.execute(f"CREATE VIRTUAL TABLE {module.name} USING {module.name}()")
+        else:
+            apsw.ext.make_virtual_module(db, module.name, module.module)
