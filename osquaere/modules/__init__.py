@@ -6,6 +6,7 @@ from . import os_version, processes
 
 modules = [os_version, processes]
 
+
 def load_modules(db):
     for module in modules:
         print(f'Loading module "{module.name}"')

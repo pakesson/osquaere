@@ -1,6 +1,7 @@
 from enum import Enum
 import platform
 
+
 class Platform(Enum):
     LINUX = 1
     WINDOWS = 2

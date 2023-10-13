@@ -20,6 +20,7 @@ class SingleRowCursor:
     def Close(self):
         pass
 
+
 class SingleRowTable:
     def __init__(self, columns, data):
         self.columns = columns

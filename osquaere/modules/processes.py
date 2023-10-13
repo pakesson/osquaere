@@ -7,6 +7,7 @@ import psutil
 
 from osquaere.platform import Platform
 
+
 @dataclass
 class RowBase:
     pid: int
@@ -36,6 +37,7 @@ class RowBase:
     threads: int
     nice: int
 
+
 @dataclass
 class RowWindows(RowBase):
     elevated_token: int = 0
@@ -46,6 +48,7 @@ class RowWindows(RowBase):
     handle_count: int = 0
     percent_processor_time: int = 0
 
+
 @dataclass
 class RowDarwin(RowBase):
     upid: int = 0
@@ -54,9 +57,11 @@ class RowDarwin(RowBase):
     cpu_subtype: int = 0
     translated: int = 0
 
+
 @dataclass
 class RowLinux(RowBase):
     cgroup_path: str = ""
+
 
 Row = RowBase
 platform = Platform.get_platform()
@@ -69,57 +74,59 @@ elif platform == Platform.LINUX:
 
 columns = tuple(field.name for field in dataclasses.fields(Row))
 
+
 class ProcessModule:
     @staticmethod
     def module_function():
-        for proc in psutil.process_iter([]): # TODO: Only iterate over necessary fields
+        for proc in psutil.process_iter([]):  # TODO: Only iterate over necessary fields
             row = Row(
-                pid = proc.info["pid"],
-                name = proc.info["name"],
-                path = proc.info["exe"],
-                cmdline = " ".join(proc.info["cmdline"]),
-                state = proc.info["status"],
-                cwd = proc.info["cwd"],
-                root = "", # TODO
-                uid = proc.info["uids"][0],
-                gid = proc.info["gids"][0],
-                euid = proc.info["uids"][1],
-                egid = proc.info["gids"][1],
-                suid = proc.info["uids"][2],
-                sgid = proc.info["gids"][2],
-                on_disk = 0, # TODO
-                wired_size = 0, # TODO
-                resident_size = 0, # TODO
-                total_size = 0, # TODO
-                user_time = proc.info["cpu_times"][0],
-                system_time = proc.info["cpu_times"][1],
-                disk_bytes_read = 0, # TODO
-                disk_bytes_written = 0, # TODO
-                start_time = proc.info["create_time"],
-                parent = proc.info["ppid"],
-                pgroup = 0, # TODO
-                threads = proc.info["num_threads"],
-                nice = 0 # TODO
+                pid=proc.info["pid"],
+                name=proc.info["name"],
+                path=proc.info["exe"],
+                cmdline=" ".join(proc.info["cmdline"]),
+                state=proc.info["status"],
+                cwd=proc.info["cwd"],
+                root="",  # TODO
+                uid=proc.info["uids"][0],
+                gid=proc.info["gids"][0],
+                euid=proc.info["uids"][1],
+                egid=proc.info["gids"][1],
+                suid=proc.info["uids"][2],
+                sgid=proc.info["gids"][2],
+                on_disk=0,  # TODO
+                wired_size=0,  # TODO
+                resident_size=0,  # TODO
+                total_size=0,  # TODO
+                user_time=proc.info["cpu_times"][0],
+                system_time=proc.info["cpu_times"][1],
+                disk_bytes_read=0,  # TODO
+                disk_bytes_written=0,  # TODO
+                start_time=proc.info["create_time"],
+                parent=proc.info["ppid"],
+                pgroup=0,  # TODO
+                threads=proc.info["num_threads"],
+                nice=0,  # TODO
             )
 
             if platform == Platform.WINDOWS:
-                row.elevated_token = 0 # TODO
-                row.secure_process = 0 # TODO
-                row.protection_type = "" # TODO
-                row.virtual_process = 0 # TODO
-                row.elapsed_time = 0 # TODO
-                row.handle_count = 0 # TODO
-                row.percent_processor_time = 0 # TODO
+                row.elevated_token = 0  # TODO
+                row.secure_process = 0  # TODO
+                row.protection_type = ""  # TODO
+                row.virtual_process = 0  # TODO
+                row.elapsed_time = 0  # TODO
+                row.handle_count = 0  # TODO
+                row.percent_processor_time = 0  # TODO
             elif platform == Platform.DARWIN:
-                row.upid = 0 # TODO
-                row.uppid = 0 # TODO
-                row.cpu_type = 0 # TODO
-                row.cpu_subtype = 0 # TODO
-                row.translated = 0 # TODO
+                row.upid = 0  # TODO
+                row.uppid = 0  # TODO
+                row.cpu_type = 0  # TODO
+                row.cpu_subtype = 0  # TODO
+                row.translated = 0  # TODO
             elif platform == Platform.LINUX:
-                row.cgroup_path = "" # TODO
+                row.cgroup_path = ""  # TODO
 
             yield row
+
 
 module = ProcessModule.module_function
 module.columns = columns
