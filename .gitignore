@@ -1,6 +1,7 @@
 # Editors
 .vscode/
 .idea/
+.ruff_cache/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -35,3 +36,6 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+# Backups
+bak/
