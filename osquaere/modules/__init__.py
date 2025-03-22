@@ -2,10 +2,10 @@ import inspect
 
 import apsw
 
-from . import os_version, processes
+from . import os_version, processes, time
 
-modules = [os_version, processes]
 
+modules = [os_version, processes, time]
 
 def load_modules(db):
     for module in modules:
