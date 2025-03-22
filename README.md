@@ -29,3 +29,4 @@ osquaere> SELECT * FROM os_version;
 │ Ubuntu │ 22.04   │ 22    │ 04    │       │       │ ubuntu   │ debian        │ jammy    │ x86_64 │
 └────────┴─────────┴───────┴───────┴───────┴───────┴──────────┴───────────────┴──────────┴────────┘
 ```
+Press Ctrl-D (Ctrl-Z on Windows) or enter `.exit` to exit.
